@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CallTracker.Models.CallRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cust_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.call_day)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.call_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.last_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAccount.user_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cust_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.call_day)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.call_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.available)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserAccount.user_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.call_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.call_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.call_id })
+        </td>
+    </tr>
+}
+
+</table>
