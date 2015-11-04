@@ -1,4 +1,4 @@
-@model IEnumerable<WebApplication9.Models.AccountViewModel>
+@model IEnumerable<WebApplication9.Models.SalesForceAccountViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -10,10 +10,10 @@
     @using (Html.BeginForm())
     {
     <p>
-        Search: @Html.TextBox("SearchString")  <input type="submit" value="Submit" />
+        Search Account Name: @Html.TextBox("SearchString")  <input type="submit" value="Submit" />
     </p>
     }
-    </p>
+   
 <table class="table">
     <tr>
         <th>

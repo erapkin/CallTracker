@@ -9,7 +9,7 @@ using WebApplication9.Models;
 
 namespace WebApplication9.Controllers
 {
-    public class AccountsController : Controller
+    public class SalesForceAccountController : Controller
     {
         // GET: /Accounts/  (SALES FORCE)
         
@@ -21,11 +21,11 @@ namespace WebApplication9.Controllers
             var instanceUrl = Session["InstanceUrl"].ToString();
 
             var client = new ForceClient(instanceUrl, accessToken, apiVersion);
-            var accounts = await client.QueryAsync<AccountViewModel>("SELECT FirstName From Contact");
+            var accounts = await client.QueryAsync<SalesForceAccountViewModel>("SELECT id, name, description FROM Account WHERE name = '" + searchString + "'");
 
             return View(accounts.records);
         }
     }
 }
 
-//id, name, description FROM Account WHERE name = '"+searchString+"'"
+//
