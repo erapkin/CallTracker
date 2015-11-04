@@ -12,6 +12,11 @@ namespace CallTracker.Controllers
 {
     public class CallRecordsController : Controller
     {
+        
+        List<CallData> morningList = new List<CallData>();
+        List<CallData> earlyAfternoonList = new List<CallData>();
+        List<CallData> midDayList = new List<CallData>();
+        List<CallData> eveningList = new List<CallData>();
         private CallTracker_beDataEntities db = new CallTracker_beDataEntities();
 
         // GET: CallRecords
@@ -128,5 +133,73 @@ namespace CallTracker.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        public void StripTime(string call_id, string cust_id, string user_id, string call_day, DateTime call_time, bool available)
+        {
+            string timeString = call_time.ToString("HH");
+            int time = Int32.Parse(timeString);
+            if (available == true)
+            {
+                AddCallsToList(call_id, cust_id, user_id, call_day, time, available);
+            }
+        }
+
+        public void AddCallsToList(string call_id, string cust_id, string user_id, string call_day, int time, bool available)
+        {
+            CallData call = new CallData(call_id, cust_id, user_id, call_day, time, available);
+            
+            int caseSwitch = time;
+
+            switch(caseSwitch)
+            {
+                case 7:
+                    morningList.Add(call);
+                    break;
+                case 8:
+                    morningList.Add(call);
+                    break;
+                case 9:
+                    morningList.Add(call);
+                    break;
+                case 10:
+                    earlyAfternoonList.Add(call);
+                    break;
+                case 11:
+                    earlyAfternoonList.Add(call);
+                    break;
+                case 12:
+                    earlyAfternoonList.Add(call);
+                    break;
+                case 13:
+                    midDayList.Add(call);
+                    break;
+                case 14:
+                    midDayList.Add(call);
+                    break;
+                case 15:
+                    midDayList.Add(call);
+                    break;
+                case 16:
+                    eveningList.Add(call);
+                    break;
+                case 17:
+                    eveningList.Add(call);
+                    break;
+                case 18:
+                    eveningList.Add(call);
+                    break;
+                case 19:
+                default:
+                    eveningList.Add(call);
+                    break;
+            }
+        }
+
+        public void CompareLists()
+        {
+
+        }
+        
+       
     }
 }
