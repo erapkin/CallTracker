@@ -80,6 +80,10 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
@@ -92,6 +96,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -192,48 +204,35 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CallData.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CallRecordsController.cs" />
     <Compile Include="Controllers\SalesForceContactController.cs" />
     <Compile Include="Controllers\SalesForceAccountController.cs" />
-    <Compile Include="Controllers\CallRecordsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserAccountsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511042143072_Initial.cs" />
+    <Compile Include="Migrations\201511042143072_Initial.Designer.cs">
+      <DependentUpon>201511042143072_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CallRecord.cs" />
+    <Compile Include="Models\CallTrackerContext.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\SalesForceAccountViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CallRecord.cs">
-      <DependentUpon>CallTrackerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CallTrackerModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CallTrackerModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CallTrackerModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CallTrackerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CallTrackerModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CallTrackerModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\SalesForceContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\UserAccount.cs">
-      <DependentUpon>CallTrackerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="sysdiagram.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -244,23 +243,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\CallTrackerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CallTrackerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CallTrackerModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CallTrackerModel.edmx</DependentUpon>
-      <LastGenOutput>CallTrackerModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CallTrackerModel.edmx.diagram">
-      <DependentUpon>CallTrackerModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\CallTrackerModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CallTrackerModel.edmx</DependentUpon>
-      <LastGenOutput>CallTrackerModel.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -311,17 +293,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\SalesForceAccount\Index.cshtml" />
-    <Content Include="Views\UserAccounts\Create.cshtml" />
-    <Content Include="Views\UserAccounts\Delete.cshtml" />
-    <Content Include="Views\UserAccounts\Details.cshtml" />
-    <Content Include="Views\UserAccounts\Edit.cshtml" />
-    <Content Include="Views\UserAccounts\Index.cshtml" />
+    <Content Include="Views\SalesForceContact\Index.cshtml" />
     <Content Include="Views\CallRecords\Create.cshtml" />
     <Content Include="Views\CallRecords\Delete.cshtml" />
     <Content Include="Views\CallRecords\Details.cshtml" />
     <Content Include="Views\CallRecords\Edit.cshtml" />
     <Content Include="Views\CallRecords\Index.cshtml" />
-    <Content Include="Views\SalesForceContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,6 +312,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511042143072_Initial.resx">
+      <DependentUpon>201511042143072_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

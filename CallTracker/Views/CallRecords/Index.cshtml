@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.cust_id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.call_day)
         </th>
         <th>
@@ -24,7 +21,10 @@
             @Html.DisplayNameFor(model => model.available)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.last_name)
+            @Html.DisplayNameFor(model => model.contact_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserAccount.user_name)
@@ -35,9 +35,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.cust_id)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.call_day)
         </td>
         <td>
@@ -47,7 +44,10 @@
             @Html.DisplayFor(modelItem => item.available)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.last_name)
+            @Html.DisplayFor(modelItem => item.contact_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserAccount.user_name)
