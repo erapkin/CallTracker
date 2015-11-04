@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace CallTracker.Models
+namespace WebApplication9.Models
 {
-    public class ContactViewModel
+    public class SalesForceContactViewModel
     {
         public string AccountId { get; set; }
         public string FirstName { get; set; }
@@ -14,6 +14,6 @@ namespace CallTracker.Models
         public string Title { get; set; }
         public string Phone { get; set; } //Business Phone
         public string Email { get; set; }
-
+        public string Id { get; set; }
     }
 }
