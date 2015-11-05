@@ -27,5 +27,3 @@ namespace WebApplication9.Models
         }
     }
 }
-
-//id, name, description FROM Account WHERE name = '"+searchString+"'"

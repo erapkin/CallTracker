@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserAccount.user_name)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th></th>
     </tr>
@@ -50,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.phone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserAccount.user_name)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.call_id }) |
