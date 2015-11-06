@@ -17,6 +17,9 @@ namespace CallTracker.Models
         public string phone { get; set; }     
 
         // Foreign Key
-        public string Email { get; set; }
+        public static string Foo()
+        {
+            return ("morning");
+        }
     }
 }

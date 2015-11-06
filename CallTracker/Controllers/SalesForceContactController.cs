@@ -30,5 +30,14 @@ namespace WebApplication9.Models
         {
             return RedirectToAction("Create", "CallRecords", new { contactId = contactId});
         }
+
+        public ActionResult ViewHistory(string contactId)
+        {
+            return RedirectToAction("Index", "CallRecords", new { contactId = contactId });
+        }
+        public static string Foo()
+        {
+            return ("morning");
+        }
     }
 }

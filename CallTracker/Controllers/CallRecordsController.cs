@@ -19,8 +19,20 @@ namespace CallTracker.Controllers
         private CallTrackerContext db = new CallTrackerContext();
 
         // GET: CallRecords
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string contactId)
         {
+            if (contactId != null)
+            {
+                var temp = from t in db.CallRecords
+                           select t;
+               string search = contactId;
+                if (!String.IsNullOrEmpty(search))
+                {
+                    temp = temp.Where(s => s.contact_id.Contains(search));
+                }
+
+                return View(await temp.ToListAsync());
+            }
             return View(await db.CallRecords.ToListAsync());
         }
 

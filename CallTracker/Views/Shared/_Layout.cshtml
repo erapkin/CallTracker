@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Call Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -31,7 +31,7 @@
                         <a href="http://localhost:58424/salesforceaccount" class="menu-item"><p> accounts </p></a>
                         <a href="http://localhost:58424/salesforcecontact" class="menu-item"> <p>contacts</p> </a>
                         <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
-                        <a href="#" class="menu-item"> <i class="fa fa-envelope"></i> </a>
+                        <a href="#" class="menu-item"> <p>Log in</p> </a>
                     </nav><!-- filters -->
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                         <defs>
@@ -51,16 +51,14 @@
                             </filter>
                         </defs>
                     </svg>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
-        </br></br></br></br></br>
+        <br><br><br><br><br>
         @RenderBody()
         <hr />
         <footer>
