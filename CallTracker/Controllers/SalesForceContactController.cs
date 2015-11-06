@@ -35,9 +35,5 @@ namespace WebApplication9.Models
         {
             return RedirectToAction("Index", "CallRecords", new { contactId = contactId });
         }
-        public static string Foo()
-        {
-            return ("morning");
-        }
     }
 }

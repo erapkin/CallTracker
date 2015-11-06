@@ -7,25 +7,25 @@
 <h2>Call History</h2>
 @using (Html.BeginForm())
 {
-    <p>
+    @*<p>
         Search Contact Id: @Html.TextBox("search")  <input type="submit" value="Submit" />
-    </p>
+    </p>*@
 }
 
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.call_day)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.call_time)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.available)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.contact_id)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.phone)
         </th>
@@ -38,18 +38,18 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.call_day)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.call_time)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.available)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.contact_id)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.phone)
         </td>

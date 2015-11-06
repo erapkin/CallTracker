@@ -94,7 +94,7 @@ namespace CallTracker.Controllers
             {                
                 db.CallRecords.Add(callRecord);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "SalesForceContact");
             }
            
 
