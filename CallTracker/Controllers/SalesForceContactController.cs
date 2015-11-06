@@ -15,7 +15,7 @@ namespace WebApplication9.Models
         
         public async Task<ActionResult> Index(string searchString)
         {
-            //searchString = "Moda3";
+            
             var accessToken = Session["AccessToken"].ToString();
             var apiVersion = Session["ApiVersion"].ToString();
             var instanceUrl = Session["InstanceUrl"].ToString();
