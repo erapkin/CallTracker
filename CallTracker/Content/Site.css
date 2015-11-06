@@ -24,8 +24,8 @@ textarea {
 }
 
 body {
-  background: #0099ff;
-  color: white;
+  background: #ffffff;
+  color:black;
   text-align: center;
 }
 
@@ -49,7 +49,7 @@ h1 {
 }
 
 .menu-item, .menu-open-button {
-  background: #00bcd4;
+  background: #00ff90;
   border-radius: 100%;
   width: 80px;
   height: 80px;
@@ -126,8 +126,8 @@ h1 {
 }
 
 .menu-item:hover {
-  background: white;
-  color: #00bcd4;
+  background: #333333;
+  color: #00ff90;
 }
 .menu-item:nth-child(3) {
   -webkit-transition-duration: 180ms;

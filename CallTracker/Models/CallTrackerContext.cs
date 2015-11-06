@@ -20,6 +20,7 @@ namespace CallTracker.Models
         }
 
         public System.Data.Entity.DbSet<CallTracker.Models.CallRecord> CallRecords { get; set; }
+       
     
     }
 }

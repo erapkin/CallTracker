@@ -13,6 +13,7 @@ namespace CallTracker
             public string Call_day { get; set; }
             public int Time { get; set; }
             public bool Available { get; set; }
+            
         public CallData(string call_id, string cust_id, string user_id, string call_day, int time, bool available)
         {
             this.Call_id = call_id;

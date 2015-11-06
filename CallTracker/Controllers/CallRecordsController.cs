@@ -8,11 +8,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CallTracker.Models;
+using Salesforce.Force;
+using WebApplication9.Models;
 
 namespace CallTracker.Controllers
 {
     public class CallRecordsController : Controller
     {
+
         List<CallData> AllCalls = new List<CallData>();
         List<CallData> morningList = new List<CallData>();
         List<CallData> earlyAfternoonList = new List<CallData>();
@@ -20,21 +23,37 @@ namespace CallTracker.Controllers
         List<CallData> eveningList = new List<CallData>();
 
         private CallTrackerContext db = new CallTrackerContext();
-        
+        public static CallTrackerContext db2 = new CallTrackerContext();
         // GET: CallRecords
-        public async Task<ActionResult> Index(string search)
-        {
-            var temp = from t in db.CallRecords
-                       select t;
+        //public async Task<ActionResult> Index(string search)
+        //{
+        //    var temp = from t in db.CallRecords
+        //               select t;
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                temp = temp.Where(s => s.contact_id.Contains(search));
+        //    if (!String.IsNullOrEmpty(search))
+        //    {
+        //        temp = temp.Where(s => s.contact_id.Contains(search));
                 
-            } 
+        //    } 
 
-            return View (await temp.ToListAsync());
-           //return View(await db.CallRecords.ToListAsync());
+        //    return View (await temp.ToListAsync());
+        //   //return View(await db.CallRecords.ToListAsync());
+
+        public async Task<ActionResult> Index(string contactId)
+        {
+            if (contactId != null)
+            {
+                var temp = from t in db.CallRecords
+                           select t;
+               string search = contactId;
+                if (!String.IsNullOrEmpty(search))
+                {
+                    temp = temp.Where(s => s.contact_id.Contains(search));
+                }
+
+                return View(await temp.ToListAsync());
+            }
+            return View(await db.CallRecords.ToListAsync());
         }
 
         // GET: CallRecords/Details/5
@@ -53,9 +72,15 @@ namespace CallTracker.Controllers
         }
 
         // GET: CallRecords/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(string contactId)
         {
-            return View();
+            if (contactId != null)
+            {
+                ViewBag.ContactId = contactId;
+                
+            }
+              return View();
         }
 
         // POST: CallRecords/Create
@@ -63,14 +88,15 @@ namespace CallTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "call_id,call_day,call_time,available,contact_id,phone,Email")] CallRecord callRecord)
+        public async Task<ActionResult> Create([Bind(Include = "call_id,call_day,call_time,contact_id,available,phone,Email")] CallRecord callRecord)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.CallRecords.Add(callRecord);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+           
 
             return View(callRecord);
         }
@@ -141,30 +167,35 @@ namespace CallTracker.Controllers
             base.Dispose(disposing);
         }
 
-        public string DetermineBestTime()
+        public static string DetermineBestTime(string contactID)
         {
-            var morningBlock = Convert.ToInt32( db.CallRecords.SqlQuery("Select Count(*) From CallRecords Where DatePart(hour, call_time) > 5 AND DatePart(hour, call_time) < 9 AND available = 1") );
-            var noonBlock = Convert.ToInt32( db.CallRecords.SqlQuery("Select Count(*) From CallRecords Where DatePart(hour, call_time) >9 AND DatePart(hour, call_time) < 13 AND available = 1") );
-            var afternoonBlock = Convert.ToInt32( db.CallRecords.SqlQuery("Select Count(*) From CallRecords Where DatePart(hour, call_time) > 13 AND DatePart(hour, call_time) < 17 AND available = 1") );
-            var eveningBlock = Convert.ToInt32( db.CallRecords.SqlQuery("Select Count(*) From CallRecords Where DatePart(hour, call_time) > 17 AND DatePart(hour, call_time) < 21 AND available = 1") );
+            var morningBlock = db2.CallRecords.SqlQuery("Select * From CallRecords Where DatePart(hour, call_time) > 5 AND DatePart(hour, call_time) < 9 AND available = 1 AND contact_id= '" + contactID +"'");
+            int morningBlockCount = morningBlock.ToList().Count;
 
-            string bestTime;
+            var noonBlock = db2.CallRecords.SqlQuery("Select * From CallRecords Where DatePart(hour, call_time) >9 AND DatePart(hour, call_time) < 13 AND available = 1 AND contact_id= '" + contactID + "'");
+            int noonBlockCount = noonBlock.ToList().Count;
 
-            if (morningBlock > noonBlock 
-                && morningBlock > afternoonBlock
-                && morningBlock > eveningBlock) 
+            var afternoonBlock = db2.CallRecords.SqlQuery("Select * From CallRecords Where DatePart(hour, call_time) > 13 AND DatePart(hour, call_time) < 17 AND available = 1 AND contact_id= '" + contactID + "'");
+            int afternoonBlockCount = afternoonBlock.ToList().Count;
+
+            var eveningBlock = db2.CallRecords.SqlQuery("Select * From CallRecords Where DatePart(hour, call_time) > 17 AND DatePart(hour, call_time) < 21 AND available = 1 AND contact_id= '" + contactID + "'");
+            int eveningBlockCount = eveningBlock.ToList().Count;
+
+            if (morningBlockCount > noonBlockCount
+                && morningBlockCount > afternoonBlockCount
+                && morningBlockCount > eveningBlockCount) 
             { 
                 return "Morning Block";
             }
-            else if (noonBlock > morningBlock 
-                && noonBlock > afternoonBlock
-                && noonBlock > eveningBlock) 
+            else if (noonBlockCount > morningBlockCount
+                && noonBlockCount > afternoonBlockCount
+                && noonBlockCount > eveningBlockCount) 
             {
                 return "Noon Block" ;
             }
-            else if (afternoonBlock > morningBlock 
-                && afternoonBlock > noonBlock
-                && afternoonBlock > eveningBlock) 
+            else if (afternoonBlockCount > morningBlockCount
+                && afternoonBlockCount > noonBlockCount
+                && afternoonBlockCount > eveningBlockCount) 
             {
                 return "Afternoon Block" ;
             }
