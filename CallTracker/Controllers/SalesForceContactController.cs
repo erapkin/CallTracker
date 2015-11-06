@@ -15,7 +15,7 @@ namespace WebApplication9.Models
         
         public async Task<ActionResult> Index(string searchString)
         {
-            //searchString = "Moda3";
+            
             var accessToken = Session["AccessToken"].ToString();
             var apiVersion = Session["ApiVersion"].ToString();
             var instanceUrl = Session["InstanceUrl"].ToString();
@@ -34,10 +34,6 @@ namespace WebApplication9.Models
         public ActionResult ViewHistory(string contactId)
         {
             return RedirectToAction("Index", "CallRecords", new { contactId = contactId });
-        }
-        public static string Foo()
-        {
-            return ("morning");
         }
     }
 }

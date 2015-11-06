@@ -18,9 +18,7 @@
    
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -50,9 +48,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
@@ -69,13 +65,14 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @WebApplication9.Models.SalesForceContactController.Foo()
+                    @CallTracker.Controllers.CallRecordsController.DetermineBestTime(item.Id)
                 </td>
                 <td>
                     @Html.ActionLink("Add Call", "Create",  new {contactId = item.Id }) 
                 </td>
                 <td>
                     @Html.ActionLink("View History", "ViewHistory", new { contactId = item.Id })
+
                 </td>
             </tr>
         }
