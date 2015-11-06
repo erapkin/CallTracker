@@ -14,8 +14,8 @@ namespace CallTracker.Models
         public System.DateTime call_time { get; set; }
         public bool available { get; set; }
         public string contact_id { get; set; }
-        public string phone { get; set; }     
-
+        public string phone { get; set; }
+        public string Email { get; set; }
         // Foreign Key
         public static string Foo()
         {

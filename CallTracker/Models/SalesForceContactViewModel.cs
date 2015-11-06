@@ -17,7 +17,7 @@ namespace WebApplication9.Models
         public string Email { get; set; }
         public string Id { get; set; }
 
-        public string String { get; set; }
+       
 
     }
 }

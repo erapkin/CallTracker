@@ -48,6 +48,13 @@ h1 {
           filter: url("#shadowed-goo");
 }
 
+.headeryo {
+    color: white;
+     float: right;
+
+  line-height: 20px;
+  
+}
 .menu-item, .menu-open-button {
   background: #00ff90;
   border-radius: 100%;
@@ -63,6 +70,7 @@ h1 {
           transform: translate3d(0, 0, 0);
   -webkit-transition: -webkit-transform ease-out 200ms;
           transition: transform ease-out 200ms;
+         
 }
 
 .menu-open {
@@ -81,6 +89,7 @@ h1 {
   margin-top: -1.5px;
   -webkit-transition: -webkit-transform 200ms;
           transition: transform 200ms;
+
 }
 
 .hamburger-1 {
@@ -111,7 +120,51 @@ h1 {
   -webkit-transform: translate3d(0, 0, 0) rotate(-45deg);
           transform: translate3d(0, 0, 0) rotate(-45deg);
 }
+.blah {
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  color: whitesmoke;
+}
+img.responsive_logo
+{
+    position: absolute;
+    max-width: 80%;
+    top: 10%;
+    left: 10%;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
 
+img.responsive_logo:empty
+{
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (orientation: portrait) {
+  img.responsive_logo {
+      max-width: 90%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  img.responsive_logo {
+      max-height: 90%;
+  }
+}
+}
+.blah:hover,
+.blah:focus {
+  text-decoration: none;
+  color: #00ff90; 
+}
 .menu {
   position: absolute;
   left: 50%;
@@ -121,7 +174,7 @@ h1 {
   width: 650px;
   height: 150px;
   box-sizing: border-box;
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
 }
 
