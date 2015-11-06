@@ -21,9 +21,14 @@ namespace WebApplication9.Models
             var instanceUrl = Session["InstanceUrl"].ToString();
 
             var client = new ForceClient(instanceUrl, accessToken, apiVersion);
-            var contacts = await client.QueryAsync<SalesForceContactViewModel>("SELECT Id, FirstName, LastName, Title, Phone, Email From Contact WHERE FirstName LIKE'%" +searchString+ "%' OR LastName LIKE'%"+searchString+"%'");
+            var contacts = await client.QueryAsync<SalesForceContactViewModel>("SELECT Id, FirstName, LastName, Title, Phone, Email From Contact WHERE FirstName LIKE'%" + searchString + "%' OR LastName LIKE'%" + searchString + "%'");
 
             return View(contacts.records);
+        }
+        
+        public ActionResult Create(string contactId)
+        {
+            return RedirectToAction("Create", "CallRecords", new { contactId = contactId});
         }
     }
 }

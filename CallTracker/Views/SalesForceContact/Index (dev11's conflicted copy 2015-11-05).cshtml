@@ -60,7 +60,8 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.ActionLink("Add Call", "Create",  new {contactId = item.Id }) 
+                   <input id="btnShowCustomer" name="btnShowCustomer2" type="submit" value="View" />
+                    @Html.ActionLink("Add call", "Create", "CallRecords", new { contact_id = item.Id })
                 </td>
             </tr>
         }

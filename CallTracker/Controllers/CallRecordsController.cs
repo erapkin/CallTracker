@@ -8,11 +8,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CallTracker.Models;
+using Salesforce.Force;
+using WebApplication9.Models;
 
 namespace CallTracker.Controllers
 {
     public class CallRecordsController : Controller
     {
+        
         private CallTrackerContext db = new CallTrackerContext();
 
         // GET: CallRecords
@@ -37,9 +40,15 @@ namespace CallTracker.Controllers
         }
 
         // GET: CallRecords/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(string contactId)
         {
-            return View();
+            if (contactId != null)
+            {
+                ViewBag.ContactId = contactId;
+                
+            }
+              return View();
         }
 
         // POST: CallRecords/Create
@@ -47,14 +56,15 @@ namespace CallTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "call_id,call_day,call_time,available,contact_id,phone,Email")] CallRecord callRecord)
+        public async Task<ActionResult> Create([Bind(Include = "call_id,call_day,call_time,contact_id,available,phone,Email")] CallRecord callRecord)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.CallRecords.Add(callRecord);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+           
 
             return View(callRecord);
         }
