@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Accounts</h2>
+<h3>Accounts</h3>
 <p>
     @using (Html.BeginForm())
     {
-    <p>
+    <p2>
         Search Account Name: @Html.TextBox("SearchString")  <input type="submit" value="Submit" />
-    </p>
+    </p2>
     }
-   
+   <br>
 <table class="table">
     <tr>
         <th>

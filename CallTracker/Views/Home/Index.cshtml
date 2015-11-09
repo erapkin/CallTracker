@@ -1,20 +1,14 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div  >
-    <div class="callGirl">
-    <div class="jumbotron">
 
-        <h1>ASP.NET</h1>
-        <p class="lead"></p>
-        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
-    </div>  
-
-
-    <div class="jumbotron">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+<div>
+    
+    <div class="card transition">
+        <h2 class="transition">Connect with your clients</h2>
+       
+        <div class="cta-container transition cta">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</div>
+        <div class="cta-container2 transition cta">@Html.ActionLink("Log in", "Login", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</div>
+        <div class="card_circle transition"></div>
     </div>
 </div>  
