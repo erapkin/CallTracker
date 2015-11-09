@@ -299,6 +299,9 @@ body {
     margin-top: 0px;
     padding: 5px;
 }
+main{
+    text-align: center;
+}
 .card:hover h2 small { color: #fff }
 .card:hover p { margin-top: -50% }
 .card_circle {
@@ -318,7 +321,7 @@ h2 {
     font-family: 'Raleway', sans-serif;
     font-size: 36px;
     font-weight: 200;
-    margin-top: 15px;
+    margin-top: 15%;
     position: absolute;
     text-align: center;
     width: 100%;
