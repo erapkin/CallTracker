@@ -25,7 +25,19 @@ namespace WebApplication9.Models
 
             return View(contacts.records);
         }
-        
+
+        public async Task<ActionResult> IndexFromAccount(string accountId)
+        {
+
+            var accessToken = Session["AccessToken"].ToString();
+            var apiVersion = Session["ApiVersion"].ToString();
+            var instanceUrl = Session["InstanceUrl"].ToString();
+
+            var client = new ForceClient(instanceUrl, accessToken, apiVersion);
+            var contacts = await client.QueryAsync<SalesForceContactViewModel>("SELECT Id, FirstName, LastName, Title, Phone, Email From Contact WHERE AccountId= '" + accountId + "'");
+
+            return View(contacts.records);
+        }
         public ActionResult Create(string contactId)
         {
             return RedirectToAction("Create", "CallRecords", new { contactId = contactId});

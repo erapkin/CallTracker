@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebApplication9.Models.SalesForceContactViewModel>
+@{
+    ViewBag.Title = "IndexFromAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Contact</h2>
+
+<p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Search Contact Name: @Html.TextBox("searchString")  <input type="submit" value="Submit" />
+    </p>
+    }
+   
+    <table class="table">
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Best time to call
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+
+                @*<th></th>*@
+</tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @CallTracker.Controllers.CallRecordsController.DetermineBestTime(item.Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Add Call", "Create",  new {contactId = item.Id }) 
+                </td>
+                <td>
+                    @Html.ActionLink("View History", "ViewHistory", new { contactId = item.Id })
+
+                </td>
+            </tr>
+        }
+
+    </table>

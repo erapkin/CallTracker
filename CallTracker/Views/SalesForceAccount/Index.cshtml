@@ -22,6 +22,8 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+        </th>
         @*<th></th>*@
     </tr>
 
@@ -32,6 +34,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("View Contacts", "ViewAssociatedContacts", new { accountId = item.Id })
         </td>
     </tr>
 }

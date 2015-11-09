@@ -15,7 +15,7 @@ namespace WebApplication9.Controllers
         
         public async Task<ActionResult> Index(string searchString)
         {
-            //searchString = "Moda3";
+            
             var accessToken = Session["AccessToken"].ToString();
             var apiVersion = Session["ApiVersion"].ToString();
             var instanceUrl = Session["InstanceUrl"].ToString();
@@ -25,6 +25,12 @@ namespace WebApplication9.Controllers
 
             return View(accounts.records);
         }
+           
+        public ActionResult ViewAssociatedContacts(string accountId)
+        {
+            return RedirectToAction("IndexFromAccount", "SalesForceContact", new { accountID = accountId });
+        }
+
     }
 }
 
